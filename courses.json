@@ -1,0 +1,541 @@
+[
+  {
+    "code": "COMP500",
+    "name": "Programming KEEP",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP501",
+    "name": "Computing Technology in Society",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP503",
+    "name": "Object Oriented Programming",
+    "prerequisites": [
+      "COMP500",
+      "ENSE501"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP504",
+    "name": "Networks and Internet",
+    "prerequisites": [],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP507",
+    "name": "IT Project Management",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP508",
+    "name": "Database System Design",
+    "prerequisites": [
+      ""
+    ],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP517",
+    "name": "Data Analysis",
+    "prerequisites": [
+      "COMP500"
+    ],
+    "major": [
+      "DaS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP602",
+    "name": "Software Development Practice",
+    "prerequisites": [
+      [
+        "COMP603"
+      ],
+      [
+        "COMP610"
+      ]
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP603",
+    "name": "Program Design and Construction",
+    "prerequisites": [
+      "COMP503",
+      "COMP610",
+      "ENSE502"
+    ],
+    "major": [
+      "SD",
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP604",
+    "name": "Operating Systems",
+    "prerequisites": [
+      [
+        "COMP503",
+        "ENSE502",
+        "ENSE504"
+      ],
+      "COMP504"
+    ],
+    "major": [
+      "NC",
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP607",
+    "name": "Information Security Technologies",
+    "prerequisites": [
+      "COMP501"
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP609",
+    "name": "Network and System Administration",
+    "prerequisites": [
+      "COMP500",
+      "COMP504"
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP610",
+    "name": "Data Structures and Algorithms",
+    "prerequisites": [
+      "COMP503",
+      "ENSE502",
+      "ENSE602"
+    ],
+    "major": [
+      "SD",
+      "DaS",
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP611",
+    "name": "Algorithm Design and Analysis",
+    "prerequisites": [
+      "COMP610"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP612",
+    "name": "Computer Graphics Programming",
+    "prerequisites": [
+      [
+        "MATH503",
+        "COMP603"
+      ],
+      [
+        "MATH503",
+        "COMP610"
+      ],
+      [
+        "MATH502",
+        "COMP603"
+      ],
+      [
+        "MATH502",
+        "COMP610"
+      ]
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP613",
+    "name": "Combinatorics and Graph Theory",
+    "prerequisites": [
+      [
+        "COMP500",
+        "MATH502"
+      ],
+      [
+        "COMP500",
+        "MATH503"
+      ]
+    ],
+    "major": [
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP615",
+    "name": "Foundations of Data Science",
+    "prerequisites": [
+      "COMP517"
+    ],
+    "major": [
+      "DaS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP616",
+    "name": "Statistics for Data Science",
+    "prerequisites": [
+      "MATH502",
+      "MATH503"
+    ],
+    "major": [
+      "DaS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP700",
+    "name": "Text and Vision Intelligence",
+    "prerequisites": [],
+    "major": [
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP701",
+    "name": "Nature Inspired Computing",
+    "prerequisites": [
+      "COMP500"
+    ],
+    "major": [
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP702",
+    "name": "Research and Development Project (Part 1)",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP703",
+    "name": "Research and Development Project (Part 2)",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "COMP710",
+    "name": "Game Programming",
+    "prerequisites": [
+      "COMP612"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP711",
+    "name": "Theory of Computation",
+    "prerequisites": [
+      [
+        "COMP610"
+      ],
+      [
+        "COMP613"
+      ]
+    ],
+    "major": [
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP712",
+    "name": "Programming Languages",
+    "prerequisites": [
+      "COMP603",
+      "ENSE502"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP713",
+    "name": "Distributed and Mobile Systems",
+    "prerequisites": [
+      "COMP611"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP714",
+    "name": "Advanced Network Technologies",
+    "prerequisites": [
+      "COMP609"
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP715",
+    "name": "Network Security",
+    "prerequisites": [
+      "ENEL611"
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP716",
+    "name": "Highly Secure Systems",
+    "prerequisites": [
+      [
+        "COMP611"
+      ],
+      [
+        "ENGE501",
+        "COMP610"
+      ]
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP717",
+    "name": "Artificial Intelligence",
+    "prerequisites": [],
+    "major": [
+      "CS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP718",
+    "name": "Information Security Management",
+    "prerequisites": [],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP721",
+    "name": "Web Development",
+    "prerequisites": [
+      "COMP603",
+      "ENSE600"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP723",
+    "name": "Data Mining and Knowledge Engineering",
+    "prerequisites": [],
+    "major": [
+      "DaS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP726",
+    "name": "Blockchains and Cryptocurrencies",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP728",
+    "name": "IoT and Applications",
+    "prerequisites": [
+      ""
+    ],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP729",
+    "name": "Enterprise Networks",
+    "prerequisites": [
+      "COMP504",
+      "ENEL504"
+    ],
+    "major": [
+      "NC"
+    ],
+    "core": false
+  },
+  {
+    "code": "DIGD517",
+    "name": "Mahi Tahi: Collaborative Pracitces",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "ENSE502",
+    "name": "Software Engineering",
+    "prerequisites": [
+      "COMP503"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "ENSE504",
+    "name": "Operating Systems",
+    "prerequisites": [
+      "COMP503"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS502",
+    "name": "Digital Services in IT",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS603",
+    "name": "Needs Analysis, Acquisition and Training",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS604",
+    "name": "Service Modelling",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS604",
+    "name": "Service Modelling",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS605",
+    "name": "Microservices",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS605",
+    "name": "Microservices",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "INFS704",
+    "name": "Service Innovation and Design",
+    "prerequisites": [],
+    "major": [
+      "DiS"
+    ],
+    "core": false
+  },
+  {
+    "code": "MATH502",
+    "name": "Algebra and Discrete Mathematics",
+    "prerequisites": [],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "MATH503",
+    "name": "Mathematics for Computing",
+    "prerequisites": [
+      ""
+    ],
+    "major": [],
+    "core": true
+  },
+  {
+    "code": "STAT603",
+    "name": "Forecasting",
+    "prerequisites": [
+      "MATH502",
+      "MATH503"
+    ],
+    "major": [
+      "DaS"
+    ],
+    "core": false
+  }
+]

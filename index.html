@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BCIS Course Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Course Planner</h1>
+
+  <form id="majorForm">
+    <label for="majorSelect">Choose a Major:</label>
+    <select id="majorSelect" required>
+      <option value="">-- Select Major --</option>
+    </select>
+    <button type="submit">Generate Plan</button>
+  </form>
+
+  <div id="plannerGrid" class="grid"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
