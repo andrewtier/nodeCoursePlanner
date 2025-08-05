@@ -2,31 +2,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const majorSelect = document.getElementById("majorSelect");
   const plannerGrid = document.getElementById("plannerGrid");
   let courses = [];
+  let presetPlans = [];
 
-  // Helper to check if prerequisites are met, supporting OR logic via arrays
+  // Helper: Check if prerequisites are met
   function hasMetPrerequisites(course, completedCourses) {
-  if (!course.prerequisites || course.prerequisites.length === 0) return true;
+    if (!course.prerequisites || course.prerequisites.length === 0) return true;
 
-  // course.prerequisites is an array of prerequisite options (OR between them)
-  // each prerequisite option can be a string (single) or array (AND group)
+    return course.prerequisites.some(prereqOption => {
+      if (Array.isArray(prereqOption)) {
+        return prereqOption.every(prereq => completedCourses.includes(prereq));
+      } else {
+        return completedCourses.includes(prereqOption);
+      }
+    });
+  }
 
-  // Return true if any of the prerequisite options is satisfied
-  return course.prerequisites.some(prereqOption => {
-    if (Array.isArray(prereqOption)) {
-      // All prereqs in this option must be satisfied (AND)
-      return prereqOption.every(prereq => completedCourses.includes(prereq));
-    } else {
-      // Single prereq string must be satisfied
-      return completedCourses.includes(prereqOption);
-    }
-  });
-}
-
-
+  // Fetch courses.json
   fetch("courses.json")
     .then(res => res.json())
     .then(data => {
       courses = data;
+
+      // Fix specific OR prerequisites
+      const orMathCourses = ["COMP616", "STAT603", "COMP613"];
+      courses.forEach(course => {
+        if (orMathCourses.includes(course.code)) {
+          course.prerequisites = [["MATH502", "MATH503"]];
+        }
+      });
 
       const majorMap = {
         "DiS": "Digital Services",
@@ -36,15 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "CS": "Computer Science"
       };
 
-      // Patch specific courses that require MATH502 or MATH503 as prerequisites
-      const orMathCourses = ["COMP616", "STAT603", "COMP613"];
-      courses.forEach(course => {
-        if (orMathCourses.includes(course.code)) {
-          course.prerequisites = [["MATH502", "MATH503"]];
-        }
-      });
-
-      // Populate major dropdown with unique major codes and their friendly names
       const majors = new Set();
       courses.forEach(course => {
         if (Array.isArray(course.major)) {
@@ -52,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Clear any existing options except the placeholder
       majorSelect.innerHTML = `<option value="">-- Select Major --</option>`;
       majors.forEach(major => {
         const option = document.createElement("option");
@@ -60,96 +53,138 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = majorMap[major] || major;
         majorSelect.appendChild(option);
       });
+    })
+    .catch(err => {
+      console.error("Error loading courses.json:", err);
+    });
 
-      // Form submission handler
-      document.getElementById("majorForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const selectedMajor = majorSelect.value.trim();
-        plannerGrid.innerHTML = '';
+  // Fetch presetPlans.json
+  fetch("presetPlans.json")
+    .then(res => res.json())
+    .then(data => {
+      presetPlans = data;
+    })
+    .catch(err => {
+      console.error("Error loading presetPlans.json:", err);
+    });
 
-        if (!selectedMajor) {
-          plannerGrid.innerHTML = "<p>Please select a major.</p>";
-          return;
-        }
+  // Form submission
+  document.getElementById("majorForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const selectedMajor = majorSelect.value.trim();
+    plannerGrid.innerHTML = '';
 
-        // Filter core courses (exclude R&D projects)
-        const coreCourses = courses.filter(c => c.core && c.code !== "COMP702" && c.code !== "COMP703");
+    if (!selectedMajor) {
+      plannerGrid.innerHTML = "<p>Please select a major.</p>";
+      return;
+    }
 
-        // Filter major-specific courses based on selected major
-        const majorCourses = courses.filter(c =>
-          Array.isArray(c.major) &&
-          c.major.some(m => m.trim() === selectedMajor)
-        );
+    const matchingPlan = presetPlans.find(plan => plan.major === selectedMajor);
 
-        // R&D courses to be placed in the final semester
-        const rndCourses = courses.filter(c => c.code === "COMP702" || c.code === "COMP703");
-
-        // Combine core and major courses (excluding R&D)
-        const combinedCourses = [...coreCourses, ...majorCourses];
-
-        let completedCourses = [];
-        let planCourses = [];
-
-        // Schedule 5 semesters, 4 courses each
-        for (let sem = 0; sem < 5; sem++) {
-          const semesterCourses = [];
-
-          for (const course of combinedCourses) {
-            if (
-              semesterCourses.length < 4 &&
-              !planCourses.includes(course) &&
-              hasMetPrerequisites(course, completedCourses)
-            ) {
-              semesterCourses.push(course);
-              planCourses.push(course);
-            }
-          }
-
-          completedCourses.push(...semesterCourses.map(c => c.code));
-
-          const semesterDiv = document.createElement("div");
-          semesterDiv.className = "semester";
-          semesterDiv.innerHTML = `<h3>Semester ${sem + 1}</h3>`;
-
-          semesterCourses.forEach(course => {
-            const courseDiv = document.createElement("div");
-            courseDiv.className = "course";
-            courseDiv.innerHTML = `<strong>${course.code}</strong><br>${course.name}`;
-            semesterDiv.appendChild(courseDiv);
-          });
-
-          plannerGrid.appendChild(semesterDiv);
-        }
-
-        // Final semester: R&D courses + leftover courses that can be taken now (max 4 courses)
-        const finalSemesterCourses = [...rndCourses];
-
-        // Add leftover courses that meet prereqs and not already planned
-        const leftoverCourses = combinedCourses.filter(c =>
-          !planCourses.includes(c) && hasMetPrerequisites(c, completedCourses)
-        );
-
-        for (const course of leftoverCourses) {
-          if (finalSemesterCourses.length >= 4) break;
-          finalSemesterCourses.push(course);
-          planCourses.push(course);
-        }
-
+    if (matchingPlan) {
+      // Use preset plan
+      matchingPlan.plan.forEach((semester, index) => {
         const semesterDiv = document.createElement("div");
         semesterDiv.className = "semester";
-        semesterDiv.innerHTML = `<h3>Semester 6</h3>`;
+        semesterDiv.innerHTML = `<h3>Semester ${index + 1}</h3>`;
 
-        finalSemesterCourses.forEach(course => {
+        semester.forEach(entry => {
+          let courseCode;
+          if (Array.isArray(entry)) {
+            courseCode = entry.find(code => courses.some(c => c.code === code));
+          } else {
+            courseCode = entry;
+          }
+
+          const course = courses.find(c => c.code === courseCode);
+
           const courseDiv = document.createElement("div");
           courseDiv.className = "course";
-          courseDiv.innerHTML = `<strong>${course.code}</strong><br>${course.name}`;
+
+          if (course) {
+            courseDiv.innerHTML = `<strong>${course.code}</strong><br>${course.name}`;
+          } else {
+            courseDiv.innerHTML = `<strong>${courseCode}</strong><br><em>Custom or Flex Course</em>`;
+          }
+
           semesterDiv.appendChild(courseDiv);
         });
 
         plannerGrid.appendChild(semesterDiv);
       });
-    })
-    .catch(err => {
-      console.error("Error loading courses.json:", err);
+
+      return; // Stop here if using preset
+    }
+
+    // Fallback: Auto-generate plan
+    const coreCourses = courses.filter(c => c.core && c.code !== "COMP702" && c.code !== "COMP703");
+
+    const majorCourses = courses.filter(c =>
+      Array.isArray(c.major) &&
+      c.major.some(m => m.trim() === selectedMajor)
+    );
+
+    const rndCourses = courses.filter(c => c.code === "COMP702" || c.code === "COMP703");
+
+    const combinedCourses = [...coreCourses, ...majorCourses];
+
+    let completedCourses = [];
+    let planCourses = [];
+
+    // Semesters 1–5
+    for (let sem = 0; sem < 5; sem++) {
+      const semesterCourses = [];
+
+      for (const course of combinedCourses) {
+        if (
+          semesterCourses.length < 4 &&
+          !planCourses.includes(course) &&
+          hasMetPrerequisites(course, completedCourses)
+        ) {
+          semesterCourses.push(course);
+          planCourses.push(course);
+        }
+      }
+
+      completedCourses.push(...semesterCourses.map(c => c.code));
+
+      const semesterDiv = document.createElement("div");
+      semesterDiv.className = "semester";
+      semesterDiv.innerHTML = `<h3>Semester ${sem + 1}</h3>`;
+
+      semesterCourses.forEach(course => {
+        const courseDiv = document.createElement("div");
+        courseDiv.className = "course";
+        courseDiv.innerHTML = `<strong>${course.code}</strong><br>${course.name}`;
+        semesterDiv.appendChild(courseDiv);
+      });
+
+      plannerGrid.appendChild(semesterDiv);
+    }
+
+    // Semester 6: R&D + leftovers
+    const finalSemesterCourses = [...rndCourses];
+    const leftoverCourses = combinedCourses.filter(c =>
+      !planCourses.includes(c) && hasMetPrerequisites(c, completedCourses)
+    );
+
+    for (const course of leftoverCourses) {
+      if (finalSemesterCourses.length >= 4) break;
+      finalSemesterCourses.push(course);
+      planCourses.push(course);
+    }
+
+    const semesterDiv = document.createElement("div");
+    semesterDiv.className = "semester";
+    semesterDiv.innerHTML = `<h3>Semester 6</h3>`;
+
+    finalSemesterCourses.forEach(course => {
+      const courseDiv = document.createElement("div");
+      courseDiv.className = "course";
+      courseDiv.innerHTML = `<strong>${course.code}</strong><br>${course.name}`;
+      semesterDiv.appendChild(courseDiv);
     });
+
+    plannerGrid.appendChild(semesterDiv);
+  });
 });

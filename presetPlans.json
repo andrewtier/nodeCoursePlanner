@@ -1,0 +1,26 @@
+[
+  {
+    "major": "SD",
+    "name": "Software Development",
+    "plan": [
+      ["COMP500", "COMP501", "DIGD517", "MATH503"],
+      ["COMP508", "COMP507", "COMP503", "FLEX"],
+      ["COMP603", "COMP610", "FLEX", "FLEX"],
+      ["COMP602", "COMP604", "FLEX", "FLEX"],
+      ["COMP702", "COMP719", "ENSE701", "FLEX"],
+      ["COMP703", "COMP721", "FLEX", "FLEX"]
+    ]
+  },
+  {
+    "major": "NC",
+    "name": "Networks and Cybersecurity",
+    "plan": [
+      ["COMP500", "COMP508", "COMP504", "COMP501"],
+      ["DIGD507", "COMP507", "FLEX", "MATH503"],
+      ["COMP607", "COMP604", "FLEX", "FLEX"],
+      ["COMP609", "ENEL611", "FLEX", "FLEX"],
+      ["COMP702", "COMP715", "COMP714", "FLEX"],
+      ["COMP703", "COMP716", "FLEX", "FLEX"]
+    ]
+  }
+]

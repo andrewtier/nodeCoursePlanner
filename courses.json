@@ -1,7 +1,7 @@
 [
   {
     "code": "COMP500",
-    "name": "Programming KEEP",
+    "name": "Programming Concepts and Techniques",
     "prerequisites": [],
     "major": [],
     "core": true
@@ -437,17 +437,6 @@
     "core": false
   },
   {
-    "code": "ENSE504",
-    "name": "Operating Systems",
-    "prerequisites": [
-      "COMP503"
-    ],
-    "major": [
-      "SD"
-    ],
-    "core": false
-  },
-  {
     "code": "INFS502",
     "name": "Digital Services in IT",
     "prerequisites": [],
@@ -468,24 +457,6 @@
   {
     "code": "INFS604",
     "name": "Service Modelling",
-    "prerequisites": [],
-    "major": [
-      "DiS"
-    ],
-    "core": false
-  },
-  {
-    "code": "INFS604",
-    "name": "Service Modelling",
-    "prerequisites": [],
-    "major": [
-      "DiS"
-    ],
-    "core": false
-  },
-  {
-    "code": "INFS605",
-    "name": "Microservices",
     "prerequisites": [],
     "major": [
       "DiS"
@@ -535,6 +506,38 @@
     ],
     "major": [
       "DaS"
+    ],
+    "core": false
+  },
+  {
+    "code": "ENSE701",
+    "name": "Contemporary Issues in Software Engineering",
+    "prerequisites": [
+      "COMP603",
+      "COMP610"
+    ],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "COMP719",
+    "name": "Applied Human Computer Interaction",
+    "prerequisites": [],
+    "major": [
+      "SD"
+    ],
+    "core": false
+  },
+  {
+    "code": "ENEL611",
+    "name": "Computer Network Applications",
+    "prerequisites": [
+      "COMP504"
+    ],
+    "major": [
+      "NC"
     ],
     "core": false
   }
