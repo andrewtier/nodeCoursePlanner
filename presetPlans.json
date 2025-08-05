@@ -46,5 +46,17 @@
       ["COMP702", "COMP717", "COMP723", "FLEX"],
       ["COMP703", "COMP700", "FLEX", "FLEX"]
     ]
+  },
+  {
+    "major": "DiS",
+    "name": "Digital Services",
+    "plan": [
+      ["COMP500", "COMP501", "COMP507", "COMP508"],
+      ["DIGD507", "MATH503", "INFS502", "FLEX"],
+      ["INFS603", "INFS604", "FLEX", "FLEX"],
+      ["INFS605", "COMP607", "FLEX", "FLEX"],
+      ["COMP702", "COMP704", "COMP726", "FLEX"],
+      ["COMP703", "COMP728", "FLEX", "FLEX"]
+    ]
   }
 ]
