@@ -532,7 +532,7 @@
   },
   {
     "code": "ENEL611",
-    "name": "Computer Network Applications",
+    "name": "Computer Network Applicationsgit",
     "prerequisites": [
       "COMP504"
     ],
