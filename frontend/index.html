@@ -2,21 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BCIS Course Planner</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Course Planner</h1>
+  <main class="container">
+    <h1>BCIS Course Planner</h1>
 
-  <form id="majorForm">
-    <label for="majorSelect">Choose a Major:</label>
-    <select id="majorSelect" required>
-      <option value="">-- Select Major --</option>
-    </select>
-    <button type="submit">Generate Plan</button>
-  </form>
+    <!-- Major form -->
+    <form id="majorForm" class="controls" aria-label="Plan generator">
+      <label for="majorSelect">Choose a Major</label>
+      <select id="majorSelect" required>
+        <option value="">-- Select Major --</option>
+      </select>
+      <button type="submit">Generate Plan</button>
+    </form>
 
-  <div id="plannerGrid" class="grid"></div>
+    <!-- Minor form -->
+    <form id="minorForm" class="controls" aria-label="Minor adder">
+      <label for="minorSelect">Choose a Minor</label>
+      <select id="minorSelect" required>
+        <option value="">-- Select Minor --</option>
+      </select>
+      <button type="submit">Add Minor</button>
+    </form>
+
+    <p id="status" role="status" aria-live="polite"></p>
+
+    <div id="plannerGrid" class="grid" aria-label="Planned semesters"></div>
+  </main>
 
   <script src="script.js" defer></script>
 </body>
